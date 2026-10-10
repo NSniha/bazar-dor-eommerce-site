@@ -91,8 +91,8 @@ async function CategoryContent({ params }) {
   return (
     <main className="min-h-[65vh] bg-[#f0f5f1]">
       <Container className="pt-6 pb-16 sm:pt-7 sm:pb-20 lg:pb-24">
-        <section className="flex min-h-[94px] items-center gap-4 rounded-[16px] border border-[#dfe7e1] bg-[#fafcfb] px-5 py-5 sm:px-6">
-          <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center text-[36px] sm:h-[52px] sm:w-[52px] sm:text-[40px]">
+        <section className="flex min-h-23.5 items-center gap-4 rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] px-5 py-5 sm:px-6">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center text-[36px] sm:h-13 sm:w-13 sm:text-[40px]">
             {categoryIcon}
           </div>
 
@@ -101,7 +101,7 @@ async function CategoryContent({ params }) {
               {categoryName}
             </h1>
 
-            <p className="mt-1.5 text-[13px] leading-[1.5] text-[#68756d] sm:text-[14px]">
+            <p className="mt-1.5 text-[13px] leading-normal text-[#68756d] sm:text-[14px]">
               Today&apos;s prices and changes for {products.length} {products.length === 1 ? "product" : "products"}.
             </p>
           </div>

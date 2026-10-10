@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <main className="flex min-h-[70vh] items-center justify-center bg-[#f0f5f1] px-4 py-16">
       <div className="mx-auto max-w-lg text-center">
-        <div className="mx-auto flex h-[76px] w-[76px] items-center justify-center rounded-[22px] bg-[#e4f2e9] text-[#008a45]">
+        <div className="mx-auto flex h-19 w-19 items-center justify-center rounded-[22px] bg-[#e4f2e9] text-[#008a45]">
           <SearchX size={36} strokeWidth={1.6} />
         </div>
 
@@ -21,7 +21,7 @@ export default function NotFound() {
           Sorry, the page or category you are looking for does not exist. Please return to the homepage and explore our products.
         </p>
 
-        <Link href="/" className="mt-8 inline-flex h-[45px] items-center justify-center gap-2 rounded-[10px] bg-[#008a45] px-7 text-[14px] font-semibold text-white shadow-[0_3px_0_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#00783b]">
+        <Link href="/" className="mt-8 inline-flex h-11.25 items-center justify-center gap-2 rounded-[10px] bg-[#008a45] px-7 text-[14px] font-semibold text-white shadow-[0_3px_0_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#00783b]">
           <ArrowLeft size={17} />
           Back to Home
         </Link>

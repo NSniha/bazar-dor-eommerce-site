@@ -55,3 +55,32 @@ export async function getCategory(slug) {
 
   return data?.category ?? data;
 }
+
+export async function getProductBySlug(slug) {
+  if (/^\d+$/.test(String(slug))) {
+    try {
+      return await getProduct(slug);
+    } catch (error) {
+      if (error.message.includes("404")) return null;
+      throw error;
+    }
+  }
+
+  const products = await getProducts();
+  const matchedProduct = products.find((product) => product.slug === slug);
+
+  if (!matchedProduct) return null;
+
+  try {
+    const product = await getProduct(matchedProduct.id);
+
+    return {
+      ...matchedProduct,
+      ...product,
+      markets: product.markets?.length ? product.markets : matchedProduct.markets,
+    };
+  } catch (error) {
+    if (matchedProduct.markets?.length) return matchedProduct;
+    throw error;
+  }
+}

@@ -25,7 +25,7 @@ export default function CategoryProducts({ products = [] }) {
 
   return (
     <div className="mt-6">
-      <section aria-label="Product sorting" className="flex min-h-[66px] items-center justify-end rounded-[16px] border border-[#dfe7e1] bg-[#fafcfb] px-5 py-3 sm:px-6">
+      <section aria-label="Product sorting" className="flex min-h-16.5 items-center justify-end rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] px-5 py-3 sm:px-6">
         <div className="flex items-center gap-3">
           <label htmlFor="category-sort" className="text-[13px] font-medium whitespace-nowrap text-[#68756d] sm:text-[14px]">
             Sort By
@@ -37,7 +37,7 @@ export default function CategoryProducts({ products = [] }) {
               value={sortBy}
               onChange={(event) => setSortBy(event.target.value)}
               disabled={products.length === 0}
-              className="h-[37px] max-w-[210px] min-w-[110px] cursor-pointer appearance-none rounded-[9px] border border-[#cfdad1] bg-[#fafcfb] pr-9 pl-3 text-[12px] font-medium text-[#202b23] outline-none transition-all duration-200 hover:border-[#008a45] focus:border-[#008a45] focus:ring-2 focus:ring-[#008a45]/10 disabled:cursor-not-allowed disabled:opacity-60 sm:text-[13px]"
+              className="h-9.25 max-w-52.5 min-w-27.5 cursor-pointer appearance-none rounded-[9px] border border-[#cfdad1] bg-[#fafcfb] pr-9 pl-3 text-[12px] font-medium text-[#202b23] outline-none transition-all duration-200 hover:border-[#008a45] focus:border-[#008a45] focus:ring-2 focus:ring-[#008a45]/10 disabled:cursor-not-allowed disabled:opacity-60 sm:text-[13px]"
             >
               <option value="default">Default</option>
               <option value="low-to-high">Price: Low to High</option>
@@ -49,19 +49,19 @@ export default function CategoryProducts({ products = [] }) {
         </div>
       </section>
 
-      <p className="mt-4 mb-[19px] text-[13px] leading-[1.5] text-[#68756d]">
+      <p className="mt-4 mb-4.75 text-[13px] leading-normal text-[#68756d]">
         Showing {sortedProducts.length} {sortedProducts.length === 1 ? "product" : "products"}.
       </p>
 
       {sortedProducts.length > 0 ? (
-        <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {sortedProducts.map((product) => (
             <ProductCard key={product.id ?? product.slug} product={product} />
           ))}
         </div>
       ) : (
-        <div className="rounded-[16px] border border-[#dfe7e1] bg-[#fafcfb] px-5 py-14 text-center sm:py-16">
-          <div className="mx-auto flex h-[64px] w-[64px] items-center justify-center rounded-2xl bg-[#edf4ef] text-[#008a45]">
+        <div className="rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] px-5 py-14 text-center sm:py-16">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-[#edf4ef] text-[#008a45]">
             <PackageX size={29} strokeWidth={1.6} />
           </div>
 
@@ -73,7 +73,7 @@ export default function CategoryProducts({ products = [] }) {
             There are currently no products available in this category. Explore other categories to find market prices.
           </p>
 
-          <Link href="/" className="mt-7 inline-flex h-[43px] items-center justify-center gap-2 rounded-[9px] bg-[#008a45] px-6 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#00783b]">
+          <Link href="/" className="mt-7 inline-flex h-10.75 items-center justify-center gap-2 rounded-[9px] bg-[#008a45] px-6 text-[13px] font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#00783b]">
             <ArrowLeft size={16} />
             Back to Home
           </Link>

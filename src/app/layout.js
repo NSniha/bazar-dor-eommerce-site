@@ -24,7 +24,7 @@ function NavbarFallback() {
   return (
     <div
       aria-hidden="true"
-      className="h-[74px] border-b border-[#e8eee9] bg-[#fafcfb] lg:h-[128px]"
+      className="h-18.5 border-b border-[#e8eee9] bg-[#fafcfb] lg:h-32"
     />
   );
 }
@@ -33,7 +33,7 @@ function TickerFallback() {
   return (
     <div
       aria-hidden="true"
-      className="h-[42px] border-b border-[#e1e8e2] bg-[#fafcfb]"
+      className="h-10.5 border-b border-[#e1e8e2] bg-[#fafcfb]"
     />
   );
 }
