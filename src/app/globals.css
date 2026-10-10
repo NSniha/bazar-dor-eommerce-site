@@ -1,26 +1,209 @@
 @import "tailwindcss";
 
+/* ==========================================
+   BAZAR DOR - DESIGN SYSTEM
+========================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  --background: #f0f5f1;
+  --foreground: #202b23;
+
+  --primary: #008a45;
+  --primary-hover: #00763a;
+
+  --surface: #fafcfb;
+  --border: #e1e8e2;
+
+  --muted: #68746b;
 }
+
+/* Tailwind CSS 4 Theme */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-primary: var(--primary);
+  --color-surface: var(--surface);
+
+  --font-sans: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ==========================================
+   GLOBAL RESET
+========================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--background);
 }
 
 body {
-  background: var(--background);
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: #d6f0df;
+  color: #00763a;
+}
+
+/* ==========================================
+   INFINITE PRICE TICKER
+========================================== */
+
+@keyframes ticker-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+
+  animation: ticker-scroll 38s linear infinite;
+
+  will-change: transform;
+}
+
+.ticker-track:hover,
+.ticker-track:focus-within {
+  animation-play-state: paused;
+}
+
+/* ==========================================
+   DESKTOP PROFILE DROPDOWN
+========================================== */
+
+@keyframes profile-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.profile-pop {
+  transform-origin: top right;
+  animation: profile-reveal 0.25s ease-out both;
+}
+
+/* ==========================================
+   MOBILE DRAWER ANIMATIONS
+========================================== */
+
+@keyframes backdrop-reveal {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drawer-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mobile-backdrop {
+  animation: backdrop-reveal 0.3s ease-out both;
+}
+
+.mobile-drawer {
+  animation: drawer-reveal 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ==========================================
+   HERO ANIMATION
+========================================== */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out both;
+}
+
+/* ==========================================
+   ACCESSIBILITY
+========================================== */
+
+:focus-visible {
+  outline: 2px solid #008a45;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ticker-track,
+  .profile-pop,
+  .mobile-backdrop,
+  .mobile-drawer,
+  .animate-fade-up {
+    animation: none;
+  }
 }
