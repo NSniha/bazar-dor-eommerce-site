@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { connection } from "next/server";
 import Link from "next/link";
 import Container from "@/components/shared/Container";
 import Hero from "@/components/home/Hero";
@@ -37,17 +38,16 @@ function MarketMessage({ title, description }) {
       <h2 className="text-xl font-bold text-[#202b23] sm:text-2xl">{title}</h2>
       <p className="mx-auto mt-3 max-w-md text-sm leading-7 text-[#68756d]">{description}</p>
 
-      <Link
-        href="/"
-        className="mt-6 inline-flex h-11 items-center justify-center rounded-lg bg-[#008a45] px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#00783b]"
-      >
-        Try Again
+      <Link href="/" className="mt-6 inline-flex h-11 items-center justify-center rounded-lg bg-[#008a45] px-6 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#00783b]">
+        Back to Home
       </Link>
     </section>
   );
 }
 
 async function MarketSections() {
+  await connection();
+
   let products;
 
   try {
