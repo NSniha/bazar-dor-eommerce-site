@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import PriceTicker from "@/components/layout/PriceTicker";
+import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
 // Global typography
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <PriceTicker />
         {children}
+         <Footer />
       </body>
     </html>
   );
