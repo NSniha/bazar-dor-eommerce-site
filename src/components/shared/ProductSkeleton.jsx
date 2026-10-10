@@ -1,8 +1,8 @@
 export default function ProductSkeleton({ count = 6 }) {
   return (
-    <div className="grid grid-cols-1 gap-[16px] sm:grid-cols-2 lg:grid-cols-3" aria-hidden="true">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" aria-hidden="true">
       {Array.from({ length: count }).map((_, index) => (
-        <div key={index} className="flex min-h-34.5 animate-pulse flex-col justify-between rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] p-[16px]">
+        <div key={index} className="flex min-h-34.5 animate-pulse flex-col justify-between rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] p-4">
           <div className="flex items-center gap-3">
             <div className="h-11.75 w-11.75 shrink-0 rounded-[11px] bg-[#e5ece7]" />
 
