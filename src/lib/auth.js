@@ -19,6 +19,7 @@ for (const key of requiredEnvVars) {
 
 export const auth = betterAuth({
   appName: "Bazar Dor",
+
   baseURL: process.env.BETTER_AUTH_URL,
 
   database: mongodbAdapter(db, {
@@ -30,6 +31,15 @@ export const auth = betterAuth({
     autoSignIn: false,
     minPasswordLength: 8,
     maxPasswordLength: 128,
+  },
+
+  account: {
+    accountLinking: {
+      enabled: true,
+      disableImplicitLinking: false,
+      allowDifferentEmails: false,
+      updateUserInfoOnLink: true,
+    },
   },
 
   socialProviders: {
