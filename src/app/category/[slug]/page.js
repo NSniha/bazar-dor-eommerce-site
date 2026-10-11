@@ -1,3 +1,4 @@
+
 import { Suspense } from "react";
 import { connection } from "next/server";
 import { notFound } from "next/navigation";
@@ -9,23 +10,108 @@ import CategoryLoading from "./loading";
 import { getCategories, getProducts } from "@/lib/bazar-api";
 
 const categoryDetails = {
-  chal: { name: "Rice", icon: "🍚" },
-  dal: { name: "Lentils", icon: "🫘" },
-  tel: { name: "Oil", icon: "🛢️" },
-  shobji: { name: "Vegetables", icon: "🥬" },
-  mach: { name: "Fish", icon: "🐟" },
-  mangsho: { name: "Meat", icon: "🍗" },
-  "dim-dudh": { name: "Eggs & Dairy", icon: "🥛" },
-  mosla: { name: "Spices", icon: "🌶️" },
+  chal: {
+    name: "Rice",
+    icon: "🍚",
+    aliases: ["chal", "rice", "চাল"],
+  },
+  dal: {
+    name: "Lentils",
+    icon: "🫘",
+    aliases: ["dal", "lentils", "ডাল"],
+  },
+  tel: {
+    name: "Oil",
+    icon: "🛢️",
+    aliases: ["tel", "oil", "তেল"],
+  },
+  shobji: {
+    name: "Vegetables",
+    icon: "🥬",
+    aliases: ["shobji", "sobji", "shak-sobji", "vegetables", "সবজি", "শাকসবজি"],
+  },
+  mach: {
+    name: "Fish",
+    icon: "🐟",
+    aliases: ["mach", "fish", "মাছ"],
+  },
+  mangsho: {
+    name: "Meat",
+    icon: "🍗",
+    aliases: ["mangsho", "meat", "মাংস"],
+  },
+  "dim-dudh": {
+    name: "Eggs & Dairy",
+    icon: "🥛",
+    aliases: ["dim-dudh", "dudh-dim", "dimdudh", "dudhdim", "eggs", "dairy", "ডিম", "দুধ", "দুগ্ধ"],
+  },
+  mosla: {
+    name: "Spices",
+    icon: "🌶️",
+    aliases: ["mosla", "moshla", "mashla", "spices", "মসলা"],
+  },
 };
+
+function normalizeSlug(value) {
+  return String(value || "").trim().toLowerCase().replace(/[\s_-]/g, "");
+}
+
+function getCategoryValues(category) {
+  if (typeof category === "string") return [category];
+
+  return [
+    category?.slug,
+    category?.name,
+    category?.nameBn,
+    category?.nameEn,
+  ].filter(Boolean);
+}
+
+function getCategoryDetails(value) {
+  const normalized = normalizeSlug(value);
+
+  return Object.values(categoryDetails).find((details) =>
+    details.aliases.some((alias) => {
+      const normalizedAlias = normalizeSlug(alias);
+      return normalized === normalizedAlias || normalized.includes(normalizedAlias);
+    })
+  );
+}
+
+function resolveCategory(categories, slug) {
+  const requestedSlug = normalizeSlug(slug);
+
+  const exactMatch = categories.find((category) =>
+    getCategoryValues(category).some((value) => normalizeSlug(value) === requestedSlug)
+  );
+
+  if (exactMatch) return exactMatch;
+
+  const details = getCategoryDetails(slug);
+
+  if (!details) return null;
+
+  return (
+    categories.find((category) =>
+      getCategoryValues(category).some((value) => {
+        const normalizedValue = normalizeSlug(value);
+
+        return details.aliases.some((alias) =>
+          normalizedValue.includes(normalizeSlug(alias))
+        );
+      })
+    ) || null
+  );
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const name = categoryDetails[slug]?.name || "Product Category";
+  const category = getCategoryDetails(slug);
+  const name = category?.name || "Product Category";
 
   return {
     title: `${name} Prices`,
-    description: `Explore today's ${name.toLowerCase()} prices and compare the latest market changes on Bazar Dor.`,
+    description: `Explore today's ${name.toLowerCase()} prices and compare market price changes on Bazar Dor.`,
   };
 }
 
@@ -70,23 +156,38 @@ async function CategoryContent({ params }) {
     return <CategoryError />;
   }
 
-  const category = categories.find((item) => item.slug === slug);
+  if (!Array.isArray(categories)) {
+    return <CategoryError />;
+  }
+
+  const category = resolveCategory(categories, slug);
 
   if (!category) {
     notFound();
   }
 
+  const apiSlug = typeof category === "string" ? category : category.slug;
+
+  if (!apiSlug) {
+    return <CategoryError />;
+  }
+
   let products;
 
   try {
-    products = await getProducts(slug);
+    products = await getProducts(apiSlug);
   } catch (error) {
     console.error("Failed to load category products:", error);
     return <CategoryError />;
   }
 
-  const categoryName = categoryDetails[slug]?.name || category.nameEn || slug.replace(/-/g, " ");
-  const categoryIcon = category.icon || categoryDetails[slug]?.icon || "🛒";
+  const details =
+    getCategoryDetails(slug) ||
+    getCategoryValues(category).map(getCategoryDetails).find(Boolean);
+
+  const categoryName = details?.name || "Products";
+  const categoryIcon = details?.icon || "🛒";
+  const productCount = products.length;
 
   return (
     <main className="min-h-[65vh] bg-[#f0f5f1]">
@@ -102,7 +203,7 @@ async function CategoryContent({ params }) {
             </h1>
 
             <p className="mt-1.5 text-[13px] leading-normal text-[#68756d] sm:text-[14px]">
-              Today&apos;s prices and changes for {products.length} {products.length === 1 ? "product" : "products"}.
+              Today&apos;s prices and changes for {productCount} {productCount === 1 ? "product" : "products"}.
             </p>
           </div>
         </section>

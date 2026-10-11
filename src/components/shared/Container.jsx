@@ -5,7 +5,7 @@ export default function Container({
 }) {
   return (
     <Component
-      className={`mx-auto w-full max-w-7xl px-4 ${className}`}
+      className={`mx-auto w-full max-w-310 px-4 ${className}`}
     >
       {children}
     </Component>
