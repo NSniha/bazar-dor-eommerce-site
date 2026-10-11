@@ -12,8 +12,14 @@ if (!uri) {
   throw new Error("MONGODB_URI is missing from environment variables.");
 }
 
+const options = {
+  serverSelectionTimeoutMS: 10000,
+  connectTimeoutMS: 10000,
+  maxPoolSize: 10,
+};
+
 const mongoClient =
-  globalThis._bazarDorMongoClient || new MongoClient(uri);
+  globalThis._bazarDorMongoClient || new MongoClient(uri, options);
 
 if (process.env.NODE_ENV !== "production") {
   globalThis._bazarDorMongoClient = mongoClient;
