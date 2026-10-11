@@ -109,8 +109,8 @@ export default function ProfileClient({ initialUser }) {
   };
 
   return (
-    <main className="min-h-[calc(100svh-155px)] bg-[#f0f5f1] px-4 pt-12 pb-24 sm:px-6 sm:pt-16 lg:pt-[118px]">
-      <div className="mx-auto w-full max-w-[736px]">
+    <main className="min-h-[calc(100svh-155px)] bg-[#f0f5f1] px-4 pt-12 pb-24 sm:px-6 sm:pt-16 lg:pt-29.5">
+      <div className="mx-auto w-full max-w-184">
 
         {/* Profile Heading */}
         <div className="mb-6 sm:mb-7">
@@ -138,7 +138,7 @@ export default function ProfileClient({ initialUser }) {
               />
 
               <div className="min-w-0">
-                <h2 className="break-words text-[18px] leading-[1.4] font-semibold text-[#202b23] sm:text-[20px]">
+                <h2 className="wrap-break-word text-[18px] leading-[1.4] font-semibold text-[#202b23] sm:text-[20px]">
                   {displayName || "User"}
                 </h2>
 
