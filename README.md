@@ -6,9 +6,8 @@
 
 Track price movements, browse by category, and compare prices across local markets in one clean interface.
 
-[Live Demo](https://bazar-dor-eommerce-site.vercel.app/) · [Source Code](https://github.com/NSniha/bazar-dor-eommerce-site) · [Report an Issue](https://github.com/NSniha/bazar-dor-eommerce-site/issues)
-
-<br />
+<a href="https://bazar-dor-eommerce-site.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-Visit_Site-16A34A?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
+<a href="https://github.com/NSniha/bazar-dor-eommerce-site"><img src="https://img.shields.io/badge/Source_Code-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="Source Code" /></a>
 
 <img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,js,mongodb,nodejs,vercel,git,github&perline=9" alt="Next.js, React, Tailwind CSS, JavaScript, MongoDB, Node.js, Vercel, Git, GitHub" />
 
