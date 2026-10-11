@@ -8,35 +8,17 @@ Explore grocery prices, follow market movements, and compare products across loc
 
 <br />
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Visit_Website-16A34A?style=for-the-badge&logo=vercel&logoColor=white)](https://bazar-dor-eommerce-site.vercel.app/)
-[![Source Code](https://img.shields.io/badge/Source_Code-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NSniha/bazar-dor-eommerce-site)
+<a href="https://bazar-dor-eommerce-site.vercel.app/" title="Live Demo"><img src="https://skillicons.dev/icons?i=vercel" width="52" height="52" alt="Live Demo" /></a>
+&nbsp;&nbsp;
+<a href="https://github.com/NSniha/bazar-dor-eommerce-site" title="Source Code"><img src="https://skillicons.dev/icons?i=github" width="52" height="52" alt="Source Code" /></a>
+
+<sub>**Live Demo** &nbsp;·&nbsp; **Source Code**</sub>
 
 <br />
 
-![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=nextdotjs&logoColor=white)
-![React](https://img.shields.io/badge/React_19-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=flat-square&logo=mongodb&logoColor=white)
-![Vercel](https://img.shields.io/badge/Deployed_on_Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+<img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,js,mongodb,vercel&perline=6" alt="Next.js, React, Tailwind CSS, JavaScript, MongoDB, Vercel" />
 
 </div>
-
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Key Features](#key-features)
-- [Technology Stack](#technology-stack)
-- [Application Routes](#application-routes)
-- [Project Structure](#project-structure)
-- [API Integration](#api-integration)
-- [Getting Started](#getting-started)
-- [Deployment](#deployment)
-- [Quality Checklist](#quality-checklist)
-- [Project Goals](#project-goals)
-- [Author](#author)
-- [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -130,20 +112,50 @@ Authentication is implemented with **Better Auth** and backed by **MongoDB Atlas
 
 ## Technology Stack
 
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,js,mongodb,nodejs,npm,git,github,vercel&perline=10" alt="Technology stack icons" />
-</p>
+<div align="center">
 
-| Category           | Technologies |
-| ------------------ | ------------ |
-| **Framework & UI** | ![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) |
-| **Language**       | ![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) |
-| **Styling**        | ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) |
-| **Authentication** | ![Better Auth](https://img.shields.io/badge/Better_Auth-1F2937?style=for-the-badge) ![Google OAuth](https://img.shields.io/badge/Google_OAuth-4285F4?style=for-the-badge&logo=google&logoColor=white) ![GitHub OAuth](https://img.shields.io/badge/GitHub_OAuth-181717?style=for-the-badge&logo=github&logoColor=white) |
-| **Database**       | ![MongoDB Atlas](https://img.shields.io/badge/MongoDB_Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white) |
-| **UI Libraries**   | ![Lucide](https://img.shields.io/badge/Lucide_React-F56565?style=for-the-badge&logo=lucide&logoColor=white) ![React Hot Toast](https://img.shields.io/badge/React_Hot_Toast-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) |
-| **Tooling**        | ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white) ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white) ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white) |
-| **Deployment**     | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) |
+<table>
+  <tr>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=nextjs" width="56" height="56" alt="Next.js" /><br /><sub><b>Next.js 16</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=react" width="56" height="56" alt="React" /><br /><sub><b>React 19</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=tailwind" width="56" height="56" alt="Tailwind CSS" /><br /><sub><b>Tailwind CSS 4</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=js" width="56" height="56" alt="JavaScript" /><br /><sub><b>JavaScript</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="120"><img src="public/icons/better-auth.svg" width="56" height="56" alt="Better Auth" /><br /><sub><b>Better Auth</b></sub></td>
+    <td align="center" width="120"><img src="https://cdn.simpleicons.org/google/4285F4" width="56" height="56" alt="Google OAuth" /><br /><sub><b>Google OAuth</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=github" width="56" height="56" alt="GitHub OAuth" /><br /><sub><b>GitHub OAuth</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=mongodb" width="56" height="56" alt="MongoDB Atlas" /><br /><sub><b>MongoDB Atlas</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="120"><img src="https://cdn.simpleicons.org/lucide/F56565" width="56" height="56" alt="Lucide React" /><br /><sub><b>Lucide React</b></sub></td>
+    <td align="center" width="120"><img src="public/icons/react-hot-toast.svg" width="56" height="56" alt="React Hot Toast" /><br /><sub><b>React Hot Toast</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=nodejs" width="56" height="56" alt="Node.js" /><br /><sub><b>Node.js</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=npm" width="56" height="56" alt="npm" /><br /><sub><b>npm</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=eslint" width="56" height="56" alt="ESLint" /><br /><sub><b>ESLint</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=git" width="56" height="56" alt="Git" /><br /><sub><b>Git</b></sub></td>
+    <td align="center" width="120"><img src="https://skillicons.dev/icons?i=vercel" width="56" height="56" alt="Vercel" /><br /><sub><b>Vercel</b></sub></td>
+    <td align="center" width="120"></td>
+  </tr>
+</table>
+
+</div>
+
+| Area             | Technology                     | Purpose                                                 |
+| ---------------- | ------------------------------ | ------------------------------------------------------- |
+| Framework        | **Next.js 16 (App Router)**    | Routing, server rendering, and application architecture |
+| UI               | **React 19**                   | Reusable components and interactive interfaces          |
+| Language         | **JavaScript (ES6+)**          | Application logic and client-side behavior              |
+| Styling          | **Tailwind CSS 4**             | Responsive design and utility-based styling             |
+| Authentication   | **Better Auth**                | Email/password and social authentication                |
+| Database         | **MongoDB Atlas**              | Persistent authentication and account records           |
+| Database adapter | **@better-auth/mongo-adapter** | Better Auth integration with MongoDB                    |
+| Icons            | **Lucide React**               | Consistent interface iconography                        |
+| Notifications    | **React Hot Toast**            | Success, error, and informational feedback              |
+| Data             | **Bazar Dor REST API**         | Product and category information                        |
+| Deployment       | **Vercel**                     | Production hosting and deployment                       |
 
 ---
 
@@ -169,6 +181,7 @@ Authentication is implemented with **Better Auth** and backed by **MongoDB Atlas
 ```text
 bazar-dor/
 ├── public/                         # Static images and assets
+│   └── icons/                      # README icons (better-auth.svg, react-hot-toast.svg)
 ├── src/
 │   ├── app/
 │   │   ├── api/auth/[...all]/
@@ -275,8 +288,8 @@ Replace every placeholder with credentials from your own services, and do not in
 
 For local development, register these callback URLs with the corresponding providers:
 
-| Provider | Callback URL                                   |
-| -------- | ---------------------------------------------- |
+| Provider | Callback URL                                     |
+| -------- | ------------------------------------------------ |
 | Google   | `http://localhost:3000/api/auth/callback/google` |
 | GitHub   | `http://localhost:3000/api/auth/callback/github` |
 
@@ -312,8 +325,8 @@ The application is deployed on **Vercel**.
 
 5. Register the production OAuth callback URLs:
 
-   | Provider | Callback URL                                                         |
-   | -------- | -------------------------------------------------------------------- |
+   | Provider | Callback URL                                                          |
+   | -------- | --------------------------------------------------------------------- |
    | Google   | `https://bazar-dor-eommerce-site.vercel.app/api/auth/callback/google` |
    | GitHub   | `https://bazar-dor-eommerce-site.vercel.app/api/auth/callback/github` |
 
@@ -366,10 +379,15 @@ Bazar Dor was created to demonstrate how modern web technologies can simplify ac
 
 ## Author
 
+<div align="center">
+
 **Nobonita Saha Niha** — Front-End Developer
 
-[![GitHub](https://img.shields.io/badge/GitHub-NSniha-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/NSniha)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Nobonita_Saha_Niha-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/nobonita-saha-niha-04b501214/)
+<a href="https://github.com/NSniha" title="GitHub"><img src="https://skillicons.dev/icons?i=github" width="48" height="48" alt="GitHub" /></a>
+&nbsp;&nbsp;
+<a href="https://www.linkedin.com/in/nobonita-saha-niha-04b501214/" title="LinkedIn"><img src="https://skillicons.dev/icons?i=linkedin" width="48" height="48" alt="LinkedIn" /></a>
+
+</div>
 
 ---
 
