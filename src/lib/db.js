@@ -1,15 +1,15 @@
 import { MongoClient } from "mongodb";
 import dns from "node:dns";
 
-if (process.env.NODE_ENV === "development") {
-  dns.setServers(["8.8.8.8", "8.8.4.4"]);
-}
-
 const uri = process.env.MONGODB_URI;
 const databaseName = process.env.MONGODB_DB_NAME || "bazar_dor";
 
 if (!uri) {
   throw new Error("MONGODB_URI is missing from environment variables.");
+}
+
+if (process.env.MONGODB_USE_PUBLIC_DNS === "true") {
+  dns.setServers(["8.8.8.8", "8.8.4.4"]);
 }
 
 const options = {
