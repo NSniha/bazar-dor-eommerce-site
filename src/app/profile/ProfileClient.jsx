@@ -1,36 +1,41 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { LoaderCircle, LogOut } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Check,
+  LoaderCircle,
+  LogOut,
+  Mail,
+  UserRound,
+} from "lucide-react";
 import toast from "react-hot-toast";
 
 import { authClient } from "@/lib/auth-client";
 import UserAvatar from "@/components/shared/UserAvatar";
 
-export default function ProfileClient({ initialUser }) {
+export default function ProfileClient({
+  user,
+  initialUser,
+  mode = "view",
+}) {
   const router = useRouter();
 
-  const { refetch } = authClient.useSession();
+  const currentUser = user || initialUser || {};
 
-  const [name, setName] = useState(initialUser.name || "");
-  const [displayName, setDisplayName] = useState(
-    initialUser.name || ""
-  );
-
+  const [name, setName] = useState(currentUser.name || "");
   const [updating, setUpdating] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
 
-  const user = {
-    ...initialUser,
-    name: displayName,
-  };
+  const isEditing = mode === "edit";
 
-  // Update user profile
-  const handleUpdateProfile = async (event) => {
+  const handleUpdate = async (event) => {
     event.preventDefault();
 
-    if (updating || signingOut) return;
+    if (updating) return;
 
     const updatedName = name.trim();
 
@@ -44,8 +49,8 @@ export default function ProfileClient({ initialUser }) {
       return;
     }
 
-    if (updatedName === displayName) {
-      toast("Your profile is already up to date.", {
+    if (updatedName === currentUser.name) {
+      toast("No changes to update.", {
         icon: "ℹ️",
       });
       return;
@@ -59,31 +64,27 @@ export default function ProfileClient({ initialUser }) {
       });
 
       if (error) {
-        throw new Error(
-          error.message || "Unable to update your profile."
+        toast.error(
+          error.message || "Failed to update profile."
         );
+        return;
       }
 
-      setDisplayName(updatedName);
-      setName(updatedName);
+      toast.success("Profile updated successfully!");
 
-      toast.success("Profile updated successfully.");
-
-      await refetch();
-
+      router.replace("/profile");
       router.refresh();
-    } catch (error) {
+    } catch {
       toast.error(
-        error.message || "Unable to update your profile."
+        "Something went wrong. Please try again."
       );
     } finally {
       setUpdating(false);
     }
   };
 
-  // Sign out using Better Auth
   const handleSignOut = async () => {
-    if (signingOut || updating) return;
+    if (signingOut) return;
 
     setSigningOut(true);
 
@@ -91,146 +92,237 @@ export default function ProfileClient({ initialUser }) {
       const { error } = await authClient.signOut();
 
       if (error) {
-        throw new Error(
+        toast.error(
           error.message || "Unable to sign out."
         );
+        return;
       }
 
-      toast.success("Signed out successfully.");
-
       window.location.replace("/");
-    } catch (error) {
+    } catch {
       toast.error(
-        error.message || "Unable to sign out. Please try again."
+        "Something went wrong. Please try again."
       );
-
+    } finally {
       setSigningOut(false);
     }
   };
 
   return (
-    <main className="min-h-[calc(100svh-155px)] bg-[#f0f5f1] px-4 pt-12 pb-24 sm:px-6 sm:pt-16 lg:pt-29.5">
-      <div className="mx-auto w-full max-w-184">
+    <main className="min-h-[calc(100vh-180px)] flex-1 bg-[#f0f5f1] px-4 pt-10 pb-20 sm:pt-14 sm:pb-24">
+      <div className="mx-auto w-full max-w-[736px]">
 
-        {/* Profile Heading */}
-        <div className="mb-6 sm:mb-7">
-          <h1 className="text-[25px] leading-tight font-bold tracking-[-0.7px] text-[#202b23] sm:text-[28px]">
-            My Profile
+        {/* Page Heading */}
+        <div className="mb-8">
+          <Link
+            href="/"
+            className="mb-5 inline-flex items-center gap-2 text-[13px] font-medium text-[#718076] transition-colors hover:text-[#008a45]"
+          >
+            <ArrowLeft size={16} />
+            Back to Home
+          </Link>
+
+          <h1 className="text-[30px] font-bold tracking-[-0.8px] text-[#202b23] sm:text-[36px]">
+            {isEditing ? "Update Information" : "My Profile"}
           </h1>
 
-          <p className="mt-1.5 text-[13px] leading-relaxed text-[#69756d] sm:text-[14px]">
-            View and manage your account information.
+          <p className="mt-2 text-[14px] leading-relaxed text-[#718076] sm:text-[15px]">
+            {isEditing
+              ? "Keep your personal information up to date."
+              : "Manage your account and personal information."}
           </p>
         </div>
 
-        {/* User Profile Card */}
-        <section className="rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] p-5 transition-shadow duration-300 hover:shadow-[0_8px_28px_rgba(30,65,40,0.04)] sm:p-6">
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        {/* Profile Summary */}
+        <section className="rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] p-5 shadow-[0_8px_30px_rgba(35,65,44,0.035)] sm:p-7">
+          <div className="flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:justify-between">
 
-            {/* User Information */}
             <div className="flex min-w-0 items-center gap-4">
-
-              {/* Dynamic Profile Avatar */}
-              <UserAvatar
-                user={user}
-                size={80}
-                radius={14}
-              />
+              <div className="shrink-0">
+                <UserAvatar
+                  user={currentUser}
+                  size={80}
+                />
+              </div>
 
               <div className="min-w-0">
-                <h2 className="wrap-break-word text-[18px] leading-[1.4] font-semibold text-[#202b23] sm:text-[20px]">
-                  {displayName || "User"}
+                <h2 className="truncate text-[20px] font-bold tracking-[-0.5px] text-[#202b23] sm:text-[22px]">
+                  {currentUser.name || "User"}
                 </h2>
 
-                <p className="mt-1 break-all text-[13px] text-[#69756d] sm:text-[15px]">
-                  {user.email}
+                <p className="mt-1.5 flex items-center gap-2 text-[13px] text-[#718076] sm:text-[14px]">
+                  <Mail
+                    size={15}
+                    className="shrink-0"
+                  />
+
+                  <span className="min-w-0 truncate">
+                    {currentUser.email || "No email available"}
+                  </span>
                 </p>
               </div>
             </div>
 
-            {/* Sign Out Button */}
-            <button
-              type="button"
-              onClick={handleSignOut}
-              disabled={signingOut || updating}
-              className="inline-flex h-10 w-full shrink-0 cursor-pointer items-center justify-center gap-2 rounded-[9px] border border-[#ef4444] bg-transparent px-4 text-[13px] font-semibold text-[#ef4444] transition-all duration-200 hover:bg-[#fff0f0] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
-            >
-              {signingOut ? (
-                <LoaderCircle
-                  size={16}
-                  className="animate-spin"
-                />
-              ) : (
-                <LogOut
-                  size={16}
-                  strokeWidth={1.8}
-                />
-              )}
-
-              {signingOut ? "Signing Out..." : "Sign Out"}
-            </button>
-          </div>
-        </section>
-
-        {/* Profile Information Card */}
-        <section className="mt-6 rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] p-5 sm:p-6">
-
-          {/* Card Heading */}
-          <h2 className="text-[17px] font-semibold text-[#202b23]">
-            Information
-          </h2>
-
-          {/* Update Form */}
-          <form
-            onSubmit={handleUpdateProfile}
-            className="mt-8 space-y-4"
-          >
-
-            {/* Name Field */}
-            <div>
-              <label
-                htmlFor="profile-name"
-                className="mb-2 block text-[14px] font-medium text-[#29352d]"
+            {!isEditing && (
+              <button
+                type="button"
+                onClick={handleSignOut}
+                disabled={signingOut}
+                className="inline-flex h-11 w-full shrink-0 cursor-pointer items-center justify-center gap-2 rounded-lg border border-[#f3c7c7] bg-white px-5 text-[13px] font-semibold text-[#e54848] transition-all duration-200 hover:border-[#e54848] hover:bg-[#fff2f2] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
               >
-                Name
-              </label>
-
-              <input
-                id="profile-name"
-                name="name"
-                type="text"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-                placeholder="Enter your full name"
-                autoComplete="name"
-                minLength={2}
-                maxLength={100}
-                required
-                disabled={updating || signingOut}
-                className="h-11 w-full rounded-[9px] border border-[#dce5de] bg-transparent px-4 text-[15px] text-[#202b23] outline-none transition-all duration-200 placeholder:text-[#9ba79e] focus:border-[#008a45] focus:ring-[3px] focus:ring-[#008a45]/10 disabled:cursor-not-allowed disabled:opacity-60"
-              />
-            </div>
-
-            {/* Update Button */}
-            <button
-              type="submit"
-              disabled={updating || signingOut}
-              className="flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-[9px] bg-[#008a45] px-5 text-[14px] font-semibold text-white shadow-[0_3px_0_rgba(0,0,0,0.12)] transition-all duration-200 hover:bg-[#00763a] active:translate-y-0.5 active:shadow-none disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              {updating ? (
-                <>
+                {signingOut ? (
                   <LoaderCircle
                     size={17}
                     className="animate-spin"
                   />
-                  Updating...
-                </>
-              ) : (
-                "Update"
-              )}
-            </button>
-          </form>
+                ) : (
+                  <LogOut size={17} />
+                )}
+
+                {signingOut ? "Signing Out..." : "Sign Out"}
+              </button>
+            )}
+          </div>
         </section>
+
+        {/* Profile Information */}
+        <section className="mt-6 overflow-hidden rounded-2xl border border-[#dfe7e1] bg-[#fafcfb] shadow-[0_8px_30px_rgba(35,65,44,0.035)]">
+
+          <div className="border-b border-[#e8eee9] px-5 py-5 sm:px-7">
+            <div className="flex items-center gap-3">
+
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#e7f4eb] text-[#008a45]">
+                <UserRound size={20} />
+              </span>
+
+              <div>
+                <h2 className="text-[17px] font-bold text-[#202b23] sm:text-[18px]">
+                  Personal Information
+                </h2>
+
+                <p className="mt-1 text-[12px] text-[#829087] sm:text-[13px]">
+                  Your account details
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {isEditing ? (
+            /* Update Information Form */
+            <form
+              onSubmit={handleUpdate}
+              className="px-5 py-6 sm:px-7"
+            >
+              <div>
+                <label
+                  htmlFor="profile-name"
+                  className="mb-2 block text-[14px] font-semibold text-[#202b23]"
+                >
+                  Full Name
+                </label>
+
+                <input
+                  id="profile-name"
+                  name="name"
+                  type="text"
+                  value={name}
+                  onChange={(event) =>
+                    setName(event.target.value)
+                  }
+                  placeholder="Enter your full name"
+                  autoComplete="name"
+                  minLength={2}
+                  maxLength={100}
+                  required
+                  disabled={updating}
+                  className="h-12 w-full rounded-lg border border-[#dce5de] bg-white px-4 text-[15px] text-[#202b23] outline-none transition-all duration-200 placeholder:text-[#86938a] focus:border-[#008a45] focus:ring-[3px] focus:ring-[#008a45]/10 disabled:opacity-60"
+                />
+              </div>
+
+              <p className="mt-3 text-[12px] leading-relaxed text-[#829087]">
+                Your updated name will appear on your profile
+                and throughout Bazar Dor.
+              </p>
+
+              <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <button
+                  type="submit"
+                  disabled={updating}
+                  className="inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-[#008a45] px-6 text-[14px] font-semibold text-white transition-all duration-200 hover:bg-[#00783b] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                >
+                  {updating ? (
+                    <>
+                      <LoaderCircle
+                        size={17}
+                        className="animate-spin"
+                      />
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <Check size={17} />
+                      Update Information
+                    </>
+                  )}
+                </button>
+
+                <Link
+                  href="/profile"
+                  className="inline-flex h-11 w-full items-center justify-center rounded-lg border border-[#dce5de] bg-white px-6 text-[14px] font-semibold text-[#526056] transition-all duration-200 hover:border-[#008a45] hover:text-[#008a45] sm:w-auto"
+                >
+                  Cancel
+                </Link>
+              </div>
+            </form>
+          ) : (
+            /* Profile Details */
+            <div className="px-5 py-6 sm:px-7">
+
+              <div className="grid gap-6 sm:grid-cols-2 sm:gap-8">
+                <div>
+                  <p className="mb-2 text-[12px] font-medium text-[#829087]">
+                    Full Name
+                  </p>
+
+                  <p className="text-[15px] font-semibold text-[#202b23]">
+                    {currentUser.name || "Not provided"}
+                  </p>
+                </div>
+
+                <div className="min-w-0">
+                  <p className="mb-2 text-[12px] font-medium text-[#829087]">
+                    Email Address
+                  </p>
+
+                  <p className="truncate text-[15px] font-semibold text-[#202b23]">
+                    {currentUser.email || "Not provided"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-7 border-t border-[#e8eee9] pt-6">
+                <Link
+                  href="/profile/update"
+                  className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-[#008a45] px-6 text-[14px] font-semibold text-white shadow-[0_4px_12px_rgba(0,138,69,0.12)] transition-all duration-200 hover:bg-[#00783b] sm:w-auto"
+                >
+                  Update Information
+                  <ArrowRight size={17} />
+                </Link>
+              </div>
+            </div>
+          )}
+        </section>
+
+        {/* Footer Navigation */}
+        <div className="mt-8 text-center">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[13px] font-medium text-[#7a887f] transition-colors hover:text-[#008a45]"
+          >
+            <ArrowLeft size={15} />
+            Back to Home
+          </Link>
+        </div>
       </div>
     </main>
   );
