@@ -6,7 +6,7 @@
 
 Track price movements, browse by category, and compare prices across local markets in one clean interface.
 
-<a href="https://bazar-dor-eommerce-site.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-Visit_Site-16A34A?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
+<a href="https://bazar-dor-eommerce-site.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-Visit_Site-16A34A?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8%2BPHBhdGggZD0iTTIgMTJoMjAiLz48cGF0aCBkPSJNMTIgMmExNS4zIDE1LjMgMCAwIDEgNCAxMCAxNS4zIDE1LjMgMCAwIDEtNCAxMCAxNS4zIDE1LjMgMCAwIDEtNC0xMCAxNS4zIDE1LjMgMCAwIDEgNC0xMHoiLz48L3N2Zz4K" alt="Live Demo" /></a>
 <a href="https://github.com/NSniha/bazar-dor-eommerce-site"><img src="https://img.shields.io/badge/Source_Code-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="Source Code" /></a>
 
 <img src="https://skillicons.dev/icons?i=nextjs,react,tailwind,js,mongodb,nodejs,vercel,git,github&perline=9" alt="Next.js, React, Tailwind CSS, JavaScript, MongoDB, Node.js, Vercel, Git, GitHub" />
