@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 import { connection } from "next/server";
-import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
 import { ChevronRight, ArrowLeft, AlertCircle } from "lucide-react";
 import Container from "@/components/shared/Container";
 import ProductLoading from "./loading";
+import { auth } from "@/lib/auth";
 import { getProductBySlug } from "@/lib/bazar-api";
 import { formatPercent, formatPrice, toNumber } from "@/lib/utils";
 
@@ -646,6 +648,18 @@ async function ProductDetailsContent({ params }) {
   await connection();
 
   const { slug } = await params;
+
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session?.user) {
+    const callbackURL = `/product/${encodeURIComponent(slug)}`;
+
+    redirect(
+      `/signin?callbackURL=${encodeURIComponent(callbackURL)}&authRequired=1`
+    );
+  }
 
   let product;
 

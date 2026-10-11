@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import PriceTicker from "@/components/layout/PriceTicker";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -55,6 +56,28 @@ export default function RootLayout({ children }) {
 
           <Footer />
         </div>
+
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+          toastOptions={{
+            duration: 3500,
+            style: {
+              background: "#fafcfb",
+              color: "#202b23",
+              border: "1px solid #dfe7e1",
+              borderRadius: "12px",
+              fontSize: "13px",
+              padding: "12px 16px",
+            },
+            success: {
+              iconTheme: {
+                primary: "#008a45",
+                secondary: "#ffffff",
+              },
+            },
+          }}
+        />
       </body>
     </html>
   );
